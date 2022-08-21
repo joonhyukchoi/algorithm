@@ -44,6 +44,13 @@ temp_set = set([3, 4])
 dict_type2['a'] = dict_type2['a'] | temp_set
 print('set type dictionary: ', dict_type2)
 
+# for문 테스트
+templist = [1, 2, 3, 4, 5]
+for i in templist:
+    templist.pop()
+    print(i)
+    templist.append(i)
+
 #  문자열
 # you can write to stdout for debugging purposes, e.g.
 # print("this is a debug message")
