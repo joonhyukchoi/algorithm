@@ -13,15 +13,20 @@ def solution(rows, columns, queries):
         distances = [dy, dx, dy, dx]
         x, y = x1, y1
         for i in range(4):
+            first = array[axisx[i]][axisy[i]]
+            print(first)
             for dis in range(distances[i]):
+                print(x, y, mx[i], my[i], dis)
                 if dis == 0:
-                    array[x + mx[i]][y + my[i]] = array[axisx[i]][axisy[i]] 
+                    temp = array[x + mx[i]][y + my[i]]
+                    array[x + mx[i]][y + my[i]] = first
+                    first = temp
                 else:
                     x = x + mx[i] 
                     y = y + my[i]
-                    print(x, y, mx[i], my[i], dis)
-                    print(array)
-                    array[x + mx[i]][y + my[i]] = array[x][y]
+                    temp = array[x + mx[i]][y + my[i]]
+                    array[x + mx[i]][y + my[i]] = first
+                    first = temp
             
     return answer
 
