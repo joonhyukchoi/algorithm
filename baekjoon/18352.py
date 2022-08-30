@@ -5,7 +5,7 @@ from collections import deque
 inp = sys.stdin.readline
 
 N, M, K, X = map(int, inp().split())
-graph = [[] for _ in range(n + 1)]
+graph = [[] for _ in range(N + 1)]
 for i in range(M):
     a, b = map(int, inp().split())
     graph[a].append(b)
