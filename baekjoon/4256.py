@@ -13,6 +13,7 @@ def postorder(preorder, inorder):
     print(preorder[0], end = ' ')
 
 for _ in range(n):
+    nsize = int(inp())
     prlist = list(map(int, inp().split()))
     inlist = list(map(int, inp().split()))
     postorder(prlist, inlist)
