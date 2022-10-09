@@ -23,7 +23,7 @@ ListNode* insert_first(ListNode* head, element data)
 }
 
 // 노드 pre 뒤에 새로운 노드 삽입, pre는 따로 search 해줘야 함
-ListNode* insert_last(ListNode *head, element value)
+ListNode* insert_last(ListNode *head, element data)
 {
     ListNode *node = (ListNode *)malloc(sizeof(ListNode));
     node->data = data;
