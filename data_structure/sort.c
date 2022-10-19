@@ -46,8 +46,9 @@ int partition(int list[], int left, int right)
 {
     int pivot, temp;
     int low, high;
-
+    // 첫번쨰 요소는 비교에서 제외시키니까 + 1 안함
     low = left;
+    // 첫번째 요소 포함시키려면 + 1 해야됨
     high = right + 1;
     pivot = list[left];
     do {
@@ -57,7 +58,7 @@ int partition(int list[], int left, int right)
         } while (list[low] < pivot);
         do
         {
-            high++;
+            high--;
         } while (list[high] > pivot);
         if (low < high) SWAP(list[low], list[high], temp);
     } while (low < high);
@@ -73,5 +74,47 @@ void quick_sort(int list[], int left, int right)
         int q = partition(list, left, right);
         quick_sort(list, left, q - 1);
         quick_sort(list, q + 1, right);
+    }
+}
+
+// 병합 정렬
+int sorted[MAX_SIZE]; /*병합 정렬은 추가공간 필요*/
+
+/* i는 정렬된 왼쪽 리스트에 대한 인덱스
+    j는 정렬된 오른쪽 리스트에 대한 인덱스
+    k는 정렬될 리스트에 대한 인덱스
+*/
+void merge(int list[], int left, int mid, int right)
+{
+    int i, j, k, l;
+    i = left; j = mid + 1, k = left;
+
+    /* 분할 정렬된 리스트의 병합*/
+    while (i <= mid && j <= right) {
+        if (list[i] <= list[j])
+            sorted[k++] = list[i++];
+        else
+            sorted[k++] = list[j++];
+    }
+    /* 남아있는 레코드 일괄 복사 */
+    if (i > mid)
+        for (l = j; l <= right; l++)
+            sorted[k++] = list[l];
+    else
+        for (l = i; l <= mid; l++)
+            sorted[k++] = list[l];
+    /* 임시 배열에서 list로 재복사 */
+    for (l = left; l <= right; l++)
+        list[l] = sorted[l];
+}
+
+void merge_sort(int list[], int left, int right)
+{
+    int mid;
+    if (left < right) {
+        mid = (left + right) / 2;
+        merge_sort(list, left, mid);
+        merge_sort(list, mid + 1, right);
+        merge(list, left, mid, right);
     }
 }
