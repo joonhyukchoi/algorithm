@@ -57,3 +57,61 @@ void print_list(ListNode *head)
     for (ListNode *p = head; p != NULL; p = p->link)
         printf("%d->", p->data);
 }
+
+// 이중 포인터 이용
+typedef struct {
+    int value;
+    node_t* next;
+} node_t;
+
+void print_list_2(node_t* head)
+{
+    node_t* now = head;
+    while (now != NULL) {
+        printf("%d", now->value);
+        now = now->next;
+    }
+}
+
+void destroy(node_t* head)
+{
+    node_t* now = head;
+    while (now != NULL) {
+        node_t* next = head->next;
+        free(head);
+        now = next;
+    }
+}
+
+void insert_list_2(node_t** p_head, int num)
+{
+    node_t* now;
+
+    now = (node_t*)malloc(sizeof(node_t));
+    now->value = num;
+
+    now->next = *p_head;
+    *p_head = now;
+}
+
+// 이부분 좀 어려움
+int delete(node_t** p_head, int num)
+{
+    node_t** p_now = p_head;
+    while(*p_now != NULL) {
+        if ((*p_now)->value == num) {
+            node_t* temp = *p_now;
+            *p_now = (*p_now)->next;
+            free(temp);
+            break;
+        } 
+
+        p_now = &(*p_now)->next;
+    }
+}
+
+int main() {
+    node_t* head = NULL;
+    insert_list_2(head, 2);
+    insert_list_2(head, 3);
+}
